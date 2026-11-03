@@ -1,0 +1,10 @@
+# Dependencias de Node
+node_modules/
+
+# Archivos generados por Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# Archivo de variables de entorno (con contraseñas)
+cypress.env.json

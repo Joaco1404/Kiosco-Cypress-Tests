@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="login-container">
+    <input id="P9999_USERNAME" type="text" placeholder="Usuario" />
+    <input id="P9999_PASSWORD" type="password" placeholder="Contraseña" />
+    <button id="btn-login" type="button">Iniciar sesión</button>
+  </div>
+  
+  <div id="dashboard" style="display:none;">
+    <h1>Panel de Control</h1>
+    <h2>Ventas del mes</h2>
+  </div>
+
+  <script>
+    document.getElementById('btn-login').addEventListener('click', function() {
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
