@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nueva Venta - Kiosco</title>
+</head>
+<body>
+  <h1>Nueva Venta</h1>
+  
+  <div>
+    <select id="P7_PRODUCTO">
+      <option value="">-- Seleccione --</option>
+      <option value="1" data-precio="2000">Coca Cola 1L (2000)</option>
+      <option value="2" data-precio="1000">Alfajor (1000)</option>
+    </select>
+    
+    <input type="number" id="P7_CANTIDAD" placeholder="Cantidad" />
+    <button id="btn-agregar" type="button">Agregar producto</button>
+  </div>
+
+  <div id="mensaje-error" style="color: red; display: none;"></div>
+
+  <h2>Total Venta: $<span id="P7_TOTAL_VENTA">0</span></h2>
+
+  <ul id="lista-productos"></ul>
+
+  <script>
+    let total = 0;
+
+    document.getElementById('btn-agregar').addEventListener('click', function() {
+      const select = document.getElementById('P7_PRODUCTO');
+      const cantidadInput = document.getElementById('P7_CANTIDAD');
+      const errorDiv = document.getElementById('mensaje-error');
+      
+      const opcionSeleccionada = select.options[select.selectedIndex];
+      const precio = parseInt(opcionSeleccionada.getAttribute('data-precio'));
+      const cantidad = parseInt(cantidadInput.value);
+
+      // Validación sin alert (no bloquea el navegador)
+      if (!select.value || isNaN(cantidad) || cantidad <= 0) {
+        errorDiv.innerText = "Seleccione producto y cantidad válida";
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      // Si pasa la validación, ocultamos el error
+      errorDiv.style.display = 'none';
+
+      const subtotal = precio * cantidad;
+      total += subtotal;
+      document.getElementById('P7_TOTAL_VENTA').innerText = total;
+
+      const li = document.createElement('li');
+      li.innerText = `${opcionSeleccionada.text} - Cant: ${cantidad} - Subtotal: $${subtotal}`;
+      document.getElementById('lista-productos').appendChild(li);
+
+      // Limpiar campos
+      select.value = "";
+      cantidadInput.value = "";
+    });
+  </script>
+</body>
+</html>
