@@ -16,3 +16,8 @@ Proyecto de automatización de pruebas End-to-End (E2E) para el sistema de Punto
 2. Instalar dependencias: `npm install`
 3. Abrir la interfaz de Cypress: `npx cypress open`
 4. Seleccionar y ejecutar los tests disponibles.
+
+## 🏗️ Arquitectura del Proyecto
+Se implementó el patrón de diseño **Page Object Model (POM)** para garantizar la mantenibilidad y escalabilidad de las pruebas.
+*   `cypress/support/pages/`: Contiene las clases con los selectores y acciones de cada página (`LoginPage.js`, `VentasPage.js`).
+*   `cypress/e2e/`: Contiene los archivos de prueba que consumen los Page Objects, manteniendo los tests limpios y legibles.
