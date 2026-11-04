@@ -1,0 +1,27 @@
+name: Cypress E2E Tests
+
+# ¿Cuándo se va a ejecutar esta acción?
+on:
+  push:
+    branches: [ "main" ] # Cada vez que subas algo a la rama main
+  pull_request:
+    branches: [ "main" ] # Cada vez que alguien abra un Pull Request
+
+# ¿Qué va a hacer?
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest # Usa un servidor Linux gratuito de GitHub
+    steps:
+      # 1. Descarga tu código en el servidor
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # 2. Instala las dependencias y ejecuta Cypress
+      - name: Ejecutar Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: electron # O podés poner 'chrome'
+        # 3. Le pasamos las variables de entorno (credenciales)
+        env:
+          CYPRESS_usuario: ${{ secrets.CYPRESS_USUARIO }}
+          CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
