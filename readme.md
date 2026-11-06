@@ -3,8 +3,11 @@
 Proyecto de automatización de pruebas End-to-End (E2E) para el sistema de Punto de Venta "Kiosco", desarrollado con **Cypress** y **JavaScript**.
 
 ## 🎯 Suites de Pruebas Implementadas
-*   `login.cy.js`: Valida la seguridad y autenticación (acceso denegado y acceso exitoso al Panel de Control).
-*   `ventas.cy.js`: Valida la lógica del carrito de compras, cálculo de subtotales, acumulación de totales y validaciones de campos vacíos.
+*   `login.cy.js`: Valida la seguridad y autenticación (acceso denegado y exitoso).
+*   `ventas.cy.js`: Valida el carrito de compras, cálculo de subtotales y totales.
+*   `productos.cy.js`: Valida la creación, duplicados y campos obligatorios de productos.
+*   `proveedores.cy.js`: Valida la creación, formato de Email y CUIT duplicado.
+*   `compras.cy.js`: Valida el registro de compras pagadas/pendientes y campos obligatorios.
 
 ## 🧠 Técnicas QA Aplicadas
 *   **Mocking y Fixtures**: Debido a las políticas de seguridad (WAF) del entorno Cloud de Oracle APEX que bloquean herramientas de automatización, se implementó el uso de *Fixtures* (archivos HTML locales) para simular la interfaz y probar la lógica del front-end de forma aislada, segura y rápida.

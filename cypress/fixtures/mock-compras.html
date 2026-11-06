@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrar Compra - Kiosco</title>
+</head>
+<body>
+  <h1>Registrar Compra</h1>
+  
+  <div>
+    <select id="P15_PROVEEDOR_ID">
+      <option value="">-- Seleccione un proveedor --</option>
+      <option value="1">Distribuidora Test</option>
+      <option value="2">Mayorista Test</option>
+    </select>
+    
+    <input type="number" id="P15_TOTAL" placeholder="Total" />
+    
+    <select id="P15_ESTADO">
+      <option value="">-- Seleccione estado --</option>
+      <option value="PAGADO">Pagado</option>
+      <option value="PENDIENTE">Pendiente</option>
+    </select>
+    
+    <button id="btn-crear" type="button">Crear</button>
+  </div>
+
+  <div id="mensaje-error" style="color: red; display: none;"></div>
+  <div id="mensaje-exito" style="color: green; display: none;"></div>
+
+  <script>
+    document.getElementById('btn-crear').addEventListener('click', function() {
+      const proveedor = document.getElementById('P15_PROVEEDOR_ID').value;
+      const total = document.getElementById('P15_TOTAL').value;
+      const estado = document.getElementById('P15_ESTADO').value;
+      const errorDiv = document.getElementById('mensaje-error');
+      const exitoDiv = document.getElementById('mensaje-exito');
+
+      // Validar que se haya elegido un proveedor
+      if (!proveedor) {
+        errorDiv.innerText = "Debés elegir un proveedor.";
+        errorDiv.style.display = 'block';
+        exitoDiv.style.display = 'none';
+        return;
+      }
+
+      // Validar total
+      if (!total || parseFloat(total) <= 0) {
+        errorDiv.innerText = "Ingresá un total mayor a 0.";
+        errorDiv.style.display = 'block';
+        exitoDiv.style.display = 'none';
+        return;
+      }
+
+      // Validar estado
+      if (!estado) {
+        errorDiv.innerText = "Debés elegir un estado.";
+        errorDiv.style.display = 'block';
+        exitoDiv.style.display = 'none';
+        return;
+      }
+
+      // Todo OK
+      errorDiv.style.display = 'none';
+      exitoDiv.innerText = "Compra registrada correctamente.";
+      exitoDiv.style.display = 'block';
+
+      // Limpiar
+      document.getElementById('P15_PROVEEDOR_ID').value = '';
+      document.getElementById('P15_TOTAL').value = '';
+      document.getElementById('P15_ESTADO').value = '';
+    });
+  </script>
+</body>
+</html>

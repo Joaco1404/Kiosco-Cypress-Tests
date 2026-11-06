@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Proveedores - Kiosco</title>
+    </head>
+<body>
+    <h1>Gestión de Proveedores</h1>
+
+    <div>
+        <input type="text" id="P3_NOMBRE" placeholder="Nombre del proveedor" />
+        <input type="text" id="P3_CUIT" placeholder="CUIT" />
+        <input type="email" id="P3_EMAIL" placeholder="Email" />
+        <button id="btn-guardar" type="button">Guardar</button>
+    </div>
+
+    <div id="mensaje-error" style="color: red; display: none;"></div>
+    <div id="mensaje-exito" style="color: green; display: none;"></div>
+
+    <table border="1" id="tabla-proveedores">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>CUTI</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Acá se van a agregar los proveedores-->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('btn-guardar').addEventListener('click', function() {
+            const nombre = document.getElementById('P3_NOMBRE').value;
+            const cuit = document.getElementById('P3_CUIT').value;
+            const email = document.getElementById('P3_EMAIL').value;
+            const errorDiv = document.getElementById('mensaje-error');
+            const exitoDiv = document.getElementById('mensaje-exito');
+            const tbody = document.querySelector('#tabla-proveedores tbody');
+
+            //Validación de campos vacíos
+            if (!nombre || !cuit) {
+                errorDiv.innerText = 'El nombre y el cuit son obligatorios.';
+                errorDiv.style.display = 'block';
+                exitoDiv.style.display = 'none';
+                return;
+            }
+
+            //Validación de formato de Email (si se ingresó uno)
+            if (email && !email.includes('@')) {
+                errorDiv.innerText = "El formato del Email no es válido.";
+                errorDiv.style.display = 'block';
+                exitoDiv.style.display = 'none';
+                return;
+            }
+
+            //Simulamos validación de CUIT duplicado
+            const filas = tbody.getElementsByTagName('tr');
+            for (let i = 0; i < filas.length; i++) {
+                if (filas[i].cells[1].innerText === cuit) {
+                    errorDiv.innerText = 'Este CUIT ya está registrado.';
+                    errorDiv.style.display = 'block';
+                    exitoDiv.style.display = 'none';
+                    return;
+                }
+            }
+
+            //Si pasa las validaciones, agregamos al producto
+            errorDiv.style.display = 'none';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${nombre}</td><td>${cuit}</td><td>${email}</td>`;
+            tbody.appendChild(tr);
+
+            exitoDiv.innerText = "Proveedor guardado correctamente.";
+            exitoDiv.style.display = 'block';
+
+            //Limpiar campos
+            document.getElementById('P3_NOMBRE').value = '';
+            document.getElementById('P3_CUIT').value = '';
+            document.getElementById('P3_EMAIL').value = '';
+        })
+    </script>
+</body>
+</html>
